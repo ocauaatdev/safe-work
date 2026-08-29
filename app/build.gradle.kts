@@ -56,4 +56,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Mais icones
+    implementation("androidx.compose.material:material-icons-extended-android:1.7.8")
+
+    // navigation compose dependence
+    implementation(libs.androidx.navigation.compose)
 }
