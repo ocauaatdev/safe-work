@@ -1,6 +1,7 @@
 package br.com.fiap.safework.screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,6 +25,9 @@ import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.AutoGraph
 import androidx.compose.material.icons.outlined.Campaign
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.InsertChartOutlined
+import androidx.compose.material.icons.outlined.PieChart
+import androidx.compose.material.icons.outlined.SmartToy
 import androidx.compose.material.icons.outlined.SpaceDashboard
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -32,6 +36,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -44,7 +49,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.fiap.safework.ui.theme.SafeWorkTheme
+import br.com.fiap.safework.ui.theme.AppTheme
 
 @Composable
 fun AssistantScreen() {
@@ -70,7 +75,7 @@ fun AssistantScreen() {
 )
 @Composable
 private fun AssistantScreenPreview() {
-    SafeWorkTheme {
+    AppTheme {
         AssistantScreen()
     }
 }
@@ -79,13 +84,13 @@ private fun AssistantScreenPreview() {
 fun AssistantTopBar(modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colorScheme.surface,
+        color = MaterialTheme.colorScheme.background,
         tonalElevation = 2.dp
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .windowInsetsPadding(WindowInsets.statusBars) // respeita a status bar
+                .windowInsetsPadding(WindowInsets.statusBars)
                 .padding(horizontal = 24.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -101,13 +106,13 @@ fun AssistantTopBar(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "AI Assistant",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Text(
                     text = "Online e pronto para ajudar",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.secondary
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -121,7 +126,7 @@ fun AssistantTopBar(modifier: Modifier = Modifier) {
 )
 @Composable
 private fun AssistantTopBarPreview() {
-    SafeWorkTheme {
+    AppTheme {
         AssistantTopBar()
     }
 }
@@ -136,14 +141,15 @@ fun AssistantBottomBar(modifier: Modifier = Modifier) {
     val items = listOf(
         BottomNavigationItem("Home", Icons.Outlined.Home),
         BottomNavigationItem("Channel", Icons.Outlined.Campaign),
-        BottomNavigationItem("AI", Icons.Outlined.AutoAwesome),
-        BottomNavigationItem("Climate", Icons.Outlined.AutoGraph),
-        BottomNavigationItem("Panel", Icons.Outlined.SpaceDashboard)
+        BottomNavigationItem("AI", Icons.Outlined.SmartToy),
+        BottomNavigationItem("Climate", Icons.Outlined.InsertChartOutlined),
+        BottomNavigationItem("Panel", Icons.Outlined.PieChart)
     )
 
     NavigationBar(
         modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.surface,
+        tonalElevation = 8.dp
     ) {
         items.forEach { item ->
             NavigationBarItem(
@@ -162,7 +168,14 @@ fun AssistantBottomBar(modifier: Modifier = Modifier) {
                         text = item.title,
                         style = MaterialTheme.typography.labelMedium
                     )
-                }
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                    unselectedTextColor = MaterialTheme.colorScheme.tertiary,
+                    indicatorColor = MaterialTheme.colorScheme.surface
+                )
             )
         }
     }
@@ -174,7 +187,7 @@ fun AssistantBottomBar(modifier: Modifier = Modifier) {
 )
 @Composable
 private fun AssistantBottomBarPreview() {
-    SafeWorkTheme {
+    AppTheme {
         AssistantBottomBar()
     }
 }
@@ -254,11 +267,10 @@ fun AssistantContent(modifier: Modifier = Modifier) {
 )
 @Composable
 private fun AssistantContentPreview() {
-    SafeWorkTheme {
+    AppTheme {
         AssistantContent()
     }
 }
-
 
 @Composable
 fun AssistantInputBar(modifier: Modifier = Modifier) {
@@ -282,7 +294,8 @@ fun AssistantInputBar(modifier: Modifier = Modifier) {
                         containerColor = MaterialTheme.colorScheme.surface,
                         contentColor = MaterialTheme.colorScheme.onSurface
                     ),
-                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
                 ) {
                     Text(
                         text = sugestao,
@@ -307,7 +320,7 @@ fun AssistantInputBar(modifier: Modifier = Modifier) {
                 focusedContainerColor = MaterialTheme.colorScheme.surface,
                 unfocusedContainerColor = MaterialTheme.colorScheme.surface,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedTextColor = MaterialTheme.colorScheme.onSurface,
                 unfocusedTextColor = MaterialTheme.colorScheme.onSurface
             ),
@@ -328,7 +341,7 @@ fun AssistantInputBar(modifier: Modifier = Modifier) {
 )
 @Composable
 private fun AssistantInputBarPreview() {
-    SafeWorkTheme {
+    AppTheme {
         AssistantInputBar()
     }
 }

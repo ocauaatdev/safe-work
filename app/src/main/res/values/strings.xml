@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">safework</string>
+    <string name="app_name">SafeWork</string>
+    <string name="title_transparencia">Transparência</string>
+    <string name="subtitle_transparencia">Acompanhe o impacto das nossas ações.</string>
+    <string name="card_meta_titulo">Meta de Diversidade 2024</string>
+    <string name="card_meta_atingida">ATINGIDA</string>
+    <string name="card_meta_descricao">Faltam apenas 15% para alcançarmos nossa meta anual de contratações diversas.</string>
+    <string name="card_engajamento_titulo">Engajamento nas pesquisas</string>
+    <string name="card_denuncias_titulo">Denúncias acolhidas</string>
+    <string name="banner_privacidade">Todos os dados apresentados são agregados e anonimizados para garantir a privacidade de todos os colaboradores.</string>
+    <string name="nav_inicio">Início</string>
+    <string name="nav_canal">Canal</string>
+    <string name="nav_ia">IA</string>
+    <string name="nav_clima">Clima</string>
+    <string name="nav_painel">Painel</string>
 </resources>
