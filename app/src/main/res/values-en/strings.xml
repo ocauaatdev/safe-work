@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeWork</string>
+    <string name="title_transparencia">Transparency</string>
+    <string name="subtitle_transparencia">Follow the impact of our actions.</string>
+    <string name="card_meta_titulo">2024 Diversity Goal</string>
+    <string name="card_meta_atingida">AFFECTED</string>
+    <string name="card_meta_descricao">We are just 15% away from reaching our annual goal for diverse hires.</string>
+    <string name="card_engajamento_titulo">Survey engagement</string>
+    <string name="card_denuncias_titulo">Complaints accepted</string>
+    <string name="banner_privacidade">All data presented is aggregated and anonymized to ensure the privacy of all employees.</string>
+    <string name="nav_inicio">Start</string>
+    <string name="nav_canal">Channel</string>
+    <string name="nav_ia">AI</string>
+    <string name="nav_clima">Climate</string>
+    <string name="nav_painel">Panel</string>
+</resources>
