@@ -14,8 +14,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-//                TransparencyScreen()
+                TransparencyScreen()
                 AssistantScreen()
+                EthicalChannelScreen()
             }
         }
     }
