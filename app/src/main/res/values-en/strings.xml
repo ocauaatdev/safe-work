@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafeWork</string>
+
+    <!-- Transparency screen -->
     <string name="title_transparencia">Transparency</string>
     <string name="subtitle_transparencia">Follow our actions impact.</string>
     <string name="card_meta_titulo">2024 Diversity Goal</string>
@@ -9,24 +11,46 @@
     <string name="card_engajamento_titulo">Survey engagement</string>
     <string name="card_denuncias_titulo">Complaints accepted</string>
     <string name="banner_privacidade">All data presented is aggregated and anonymized to ensure the privacy of all employees.</string>
+
+    <!-- Shared bottom navigation bar -->
     <string name="nav_inicio">Start</string>
     <string name="nav_canal">Channel</string>
     <string name="nav_ia">AI</string>
     <string name="nav_clima">Climate</string>
     <string name="nav_painel">Panel</string>
 
-
-    //tela zero
+    <!-- Initial screen -->
     <string name="welcome_message">A safe place to listen, support and inspire changes</string>
     <string name="start_button">Start</string>
+    <string name="content_description_afrodescendente">Illustration of an Afro-descendant man</string>
+    <string name="content_description_burca">Illustration of a woman wearing a burqa</string>
+    <string name="content_description_logo">SafeWork logo</string>
 
-
-    //quarta tela **yes e no eu nao usei
+    <!-- Social Pulse screen -->
     <string name="screen_name">Social Pulse</string>
     <string name="quick_survey">Quick survey (1/2)</string>
     <string name="feeling_question">How did you feel about this working week?</string>
-    <string name="excluison_question">Have you experienced a moment when someone was made to feel left out today?</string>
+    <string name="exclusion_question">Have you experienced a moment when someone was made to feel left out today?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="submit_answers">Submit Answers</string>
+    <string name="emoji_nervoso">Nervous</string>
+    <string name="emoji_triste">Sad</string>
+    <string name="emoji_desconfortavel">Uncomfortable</string>
+    <string name="emoji_feliz">Happy</string>
+    <string name="emoji_olho_estrelado">Starry eyes</string>
+
+    <!-- Assistant screen -->
+    <string name="assistant_title">AI Assistant</string>
+    <string name="assistant_subtitle">Online and ready to help</string>
+    <string name="assistant_icon_description">Artificial intelligence icon</string>
+    <string name="assistant_input_placeholder">Ask AI something</string>
+    <string name="assistant_send_button_description">Send message</string>
+    <string name="oi_sou_ia">Olá! Eu sou a Inteligência Artificial\n</string>
+    <string name="do_app_estou_aqui_para_tirar_suas">do app. Estou aqui para tirar suas\n</string>
+    <string name="d_vidas_sobre_o_c_digo_de">dúvidas sobre o Código de\n</string>
+    <string name="conduta_linguagem_inclusiva_ou">Conduta, linguagem inclusiva ou\n</string>
+    <string name="regras_de_seguran_a_como_posso">regras de segurança. Como posso\n</string>
+    <string name="ajudar">ajudar?</string>
+
 </resources>

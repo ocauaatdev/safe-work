@@ -43,7 +43,7 @@ fun InitialScreen(){
         //imagem home afro
         Image(
             painter = painterResource(id = R.drawable.afrodescendente_male),
-            contentDescription = "Ilustração homem afordescendente",
+            contentDescription = stringResource(id = R.string.content_description_afrodescendente),
             modifier = Modifier
                 .size(90.dp)
                 .align(Alignment.TopStart)
@@ -55,7 +55,7 @@ fun InitialScreen(){
         //mulher de burca
         Image(
             painter = painterResource(id = R.drawable.burqa_female),
-            contentDescription = "Ilustração mulher de burca",
+            contentDescription = stringResource(id = R.string.content_description_burca),
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .width(125.dp)
@@ -134,7 +134,7 @@ fun InitialScreen(){
         //logo principal
         Image(
             painter = painterResource(id = R.drawable.logo_principal),
-            contentDescription = "Logo SafeWork",
+            contentDescription = stringResource(id = R.string.content_description_logo),
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .size(280.dp)
