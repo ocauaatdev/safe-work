@@ -13,4 +13,20 @@
     <string name="nav_ia">IA</string>
     <string name="nav_clima">Clima</string>
     <string name="nav_painel">Painel</string>
+
+    //tela zero
+    <string name="welcome_message">Um espaço seguro para ouvir, acolher e transformar</string>
+    <string name="start_button">Começar</string>
+
+
+    //quarta tela **yes e no eu nao usei
+    <string name="screen_name">Pulso Social</string>
+    <string name="quick_survey">Pesquisa rápida (1/2)</string>
+    <string name="feeling_question">Como você se sentiu trabalhandoaqui nesta semana?</string>
+    <string name="excluison_question">Você presenciou alguma aitutde excludente hoje?</string>
+    <string name="yes">Sim</string>
+    <string name="no">No</string>
+    <string name="submit_answers">Enviar Respostas</string>
+
+
 </resources>
