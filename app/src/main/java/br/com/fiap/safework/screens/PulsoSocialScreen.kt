@@ -15,9 +15,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,8 +28,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.SemanticsProperties.ContentDescription
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,371 +36,242 @@ import br.com.fiap.safework.ui.theme.AppTheme
 
 @Composable
 fun PulsoSocialScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF7F7F7))
-    ) {
-        //Titulo da tela
-        Text(
-            text = stringResource(R.string.screen_name),
-            modifier = Modifier
-                .padding(start = 24.dp, top = 32.dp),
-            style = MaterialTheme.typography.titleLarge,
-            color = Color(0xFF1F1F1F)
-        )
-        //Barra cinza
-        Box(
-            modifier = Modifier
-                .padding(start = 24.dp, top = 72.dp, end = 24.dp)
-                .fillMaxWidth()
-                .height(5.dp)
-                .background(
-                    color = Color(0xFFE1E1E8),
-                    shape = RoundedCornerShape(10.dp)
-                )
-        )
-
-        //barra pedacinho em verde
-        Box(
-            modifier = Modifier
-                .padding(start = 24.dp, top = 72.dp)
-                .width(165.dp)
-                .height(5.dp)
-                .background(
-                    color = Color(0xFF059669),
-                    shape = RoundedCornerShape(10.dp)
-                )
-        )
-
-        //pesquisa rapida
-        Text(
-            text = stringResource(R.string.quick_survey),
-            modifier = Modifier
-                .padding(start = 24.dp, top = 88.dp),
-            style = MaterialTheme.typography.bodySmall,
-            color = Color(0xFF6B7280)
-        )
-        //caixa branca do questionario
-
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        bottomBar = { BottomNavigationBar(selectedIndex = 3) },
+    ) { paddingValues ->
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = 24.dp,
-                    end = 24.dp,
-                    top = 120.dp
-                ),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+                .padding(24.dp)
         ) {
+            // Cabeçalho da tela (título + subtítulo), padronizado com TransparencyScreen
+            Text(
+                text = stringResource(id = R.string.screen_name),
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = stringResource(id = R.string.quick_survey),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.tertiary
+            )
 
-            // CARD 1 - COMO VOCÊ SE SENTIU
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Barra de progresso da pesquisa
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    //.height(135.dp)
-                    .shadow(
-                        elevation = 4.dp,
-                        shape = RoundedCornerShape(20.dp),
-                        ambientColor = Color.Black.copy(alpha = 0.03f),
-                        spotColor = Color.Black.copy(alpha = 0.03f)
-                    )
+                    .height(5.dp)
                     .background(
-                        color = Color.White,
-                        shape = RoundedCornerShape(20.dp)
+                        color = Color(0xFFE1E1E8),
+                        shape = RoundedCornerShape(10.dp)
                     )
-                    .padding(24.dp)
             ) {
-
-                Column(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-
-                    Text(
-                        text = stringResource(R.string.feeling_question),
-                        style = MaterialTheme.typography.titleMedium,
-
-                        color = Color(0xFF1F2937)
-                    )
-
-                    Spacer(
-                        modifier = Modifier.height(20.dp)
-                    )
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.nervous_emoji),
-                            contentDescription = "Nervoso",
-                            modifier = Modifier.size(28.dp),
-                            alpha = 0.4f
+                Box(
+                    modifier = Modifier
+                        .width(165.dp)
+                        .height(5.dp)
+                        .background(
+                            color = Color(0xFF059669),
+                            shape = RoundedCornerShape(10.dp)
                         )
-                        Image(
-                            painter = painterResource(id = R.drawable.sad_emoji),
-                            contentDescription = "Triste",
-                            modifier = Modifier.size(28.dp),
-                            alpha = 0.4f
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.unconfortable_emoji),
-                            contentDescription = "Desconfortável",
-                            modifier = Modifier.size(28.dp),
-                            alpha = 0.4f
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.happy_emoji),
-                            contentDescription = "Feliz",
-                            modifier = Modifier.size(28.dp),
-                            alpha = 0.4f
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.stareyes_emoji),
-                            contentDescription = "Olho estrelado",
-                            modifier = Modifier.size(28.dp),
-                            alpha = 0.4f
-                        )
-
-                    }
-                }
-
+                )
             }
 
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // CARD 2 - ATITUDE EXCLUDENTE
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(146.dp)
-                    .shadow(
-                        elevation = 4.dp,
-                        shape = RoundedCornerShape(20.dp),
-                        ambientColor = Color.Black.copy(alpha = 0.03f),
-                        spotColor = Color.Black.copy(alpha = 0.03f)
-                    )
-                    .background(
-                        color = Color.White,
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .padding(24.dp)
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth()
+                // CARD 1 - COMO VOCÊ SE SENTIU
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .shadow(
+                            elevation = 4.dp,
+                            shape = RoundedCornerShape(20.dp),
+                            ambientColor = Color.Black.copy(alpha = 0.03f),
+                            spotColor = Color.Black.copy(alpha = 0.03f)
+                        )
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(24.dp)
                 ) {
-                    Text(
-                        text = stringResource(R.string.excluison_question),
-                        style = MaterialTheme.typography.titleMedium,
 
-                        color = Color(0xFF1F2937)
-                    )
-                    Spacer(
-                        modifier = Modifier.height(20.dp)
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
 
-                        // BOTÃO SIM
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(48.dp)
-                                .border(
-                                    width = 1.dp,
-                                    color = Color(0xFFE5E7EB),
-                                    shape = RoundedCornerShape(16.dp)
-                                ),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "Sim",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF6B7280)
-                            )
-                        }
+                        Text(
+                            text = stringResource(R.string.feeling_question),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = Color(0xFF1F2937)
+                        )
 
-                        // BOTÃO NÃO
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(48.dp)
-                                .border(
-                                    width = 1.dp,
-                                    color = Color(0xFF059669),
-                                    shape = RoundedCornerShape(16.dp)
-                                ),
-                            contentAlignment = Alignment.Center
+                        Spacer(
+                            modifier = Modifier.height(20.dp)
+                        )
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(
-                                text = "Não",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFF059669)
+                            Image(
+                                painter = painterResource(id = R.drawable.nervous_emoji),
+                                contentDescription = stringResource(R.string.emoji_nervoso),
+                                modifier = Modifier.size(28.dp),
+                                alpha = 0.4f
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.sad_emoji),
+                                contentDescription = stringResource(R.string.emoji_triste),
+                                modifier = Modifier.size(28.dp),
+                                alpha = 0.4f
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.unconfortable_emoji),
+                                contentDescription = stringResource(R.string.emoji_desconfortavel),
+                                modifier = Modifier.size(28.dp),
+                                alpha = 0.4f
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.happy_emoji),
+                                contentDescription = stringResource(R.string.emoji_feliz),
+                                modifier = Modifier.size(28.dp),
+                                alpha = 0.4f
+                            )
+                            Image(
+                                painter = painterResource(id = R.drawable.stareyes_emoji),
+                                contentDescription = stringResource(R.string.emoji_olho_estrelado),
+                                modifier = Modifier.size(28.dp),
+                                alpha = 0.4f
                             )
                         }
                     }
-                   // **********
                 }
 
-                //******
-
-            }
-
-// BOTÃO ENVIAR RESPOSTAS
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp)
-                    .background(
-                        color = Color(0xFF059669),
-                        shape = RoundedCornerShape(16.dp)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                // CARD 2 - ATITUDE EXCLUDENTE
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(146.dp)
+                        .shadow(
+                            elevation = 4.dp,
+                            shape = RoundedCornerShape(20.dp),
+                            ambientColor = Color.Black.copy(alpha = 0.03f),
+                            spotColor = Color.Black.copy(alpha = 0.03f)
+                        )
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(24.dp)
                 ) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = stringResource(R.string.exclusion_question),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = Color(0xFF1F2937)
+                        )
+                        Spacer(
+                            modifier = Modifier.height(20.dp)
+                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
 
-                    Text(
-                        text = stringResource(R.string.submit_answers),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = Color.White
-                    )
+                            // BOTÃO SIM
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(48.dp)
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color(0xFFE5E7EB),
+                                        shape = RoundedCornerShape(16.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.yes),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = Color(0xFF6B7280)
+                                )
+                            }
 
-                    Text(
-                        text = "✓",
-                        fontSize = 14.sp,
-                        color = Color.White
-                    )
-
+                            // BOTÃO NÃO
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(48.dp)
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color(0xFF059669),
+                                        shape = RoundedCornerShape(16.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.no),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = Color(0xFF059669)
+                                )
+                            }
+                        }
+                    }
                 }
 
+                // BOTÃO ENVIAR RESPOSTAS
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp)
+                        .background(
+                            color = Color(0xFF059669),
+                            shape = RoundedCornerShape(16.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.submit_answers),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color.White
+                        )
+
+                        Text(
+                            text = "✓",
+                            fontSize = 14.sp,
+                            color = Color.White
+                        )
+                    }
+                }
             }
         }
-
-// RODAPÉ
-        Row(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .height(72.dp)
-                .background(Color.White)
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            // home
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.home),
-                    contentDescription = "Início",
-                    modifier = Modifier.size(24.dp),
-                    tint = Color(0xFFB8B8D8)
-                )
-
-                Text(
-                    text = "Início",
-                    fontSize = 12.sp,
-                    color = Color(0xFFB8B8D8)
-                )
-            }
-
-            // news
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.news__2_),
-                    contentDescription = "Canal",
-                    modifier = Modifier.size(24.dp),
-                    tint = Color(0xFFB8B8D8)
-                )
-
-                Text(
-                    text = "Canal",
-                    fontSize = 12.sp,
-                    color = Color(0xFFB8B8D8)
-                )
-            }
-
-            // IA
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ia__2_),
-                    contentDescription = "IA",
-                    modifier = Modifier.size(24.dp),
-                    tint = Color(0xFFB8B8D8)
-                )
-
-                Text(
-                    text = "IA",
-                    fontSize = 12.sp,
-                    color = Color(0xFFB8B8D8)
-                )
-            }
-
-            // graphics
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.graphics),
-                    contentDescription = "Clima",
-                    modifier = Modifier.size(24.dp),
-                    tint = Color(0xFF059669)
-                )
-
-                Text(
-                    text = "Clima",
-                    fontSize = 12.sp,
-                    color = Color(0xFF059669)
-                )
-            }
-
-            // pie_chart
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.pie_chart),
-                    contentDescription = "Painel",
-                    modifier = Modifier.size(24.dp),
-                    tint = Color(0xFFB8B8D8)
-                )
-
-                Text(
-                    text = "Painel",
-                    fontSize = 12.sp,
-                    color = Color(0xFFB8B8D8)
-                )
-            }
-        }
-
     }
+}
 
-
+@Composable
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+fun PulsoSocialScreenPreview() {
+    AppTheme {
+        PulsoSocialScreen()
     }
-
-
-    @Composable
-    @Preview(
-        showBackground = true,
-        showSystemUi = true,
-        uiMode = Configuration.UI_MODE_NIGHT_YES
-    )
-    fun PulsoSocialScreenPreview() {
-        AppTheme() {
-            PulsoSocialScreen()
-        }
-
-    }
-
+}
