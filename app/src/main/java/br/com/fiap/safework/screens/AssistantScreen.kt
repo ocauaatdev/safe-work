@@ -22,21 +22,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.AutoAwesome
-import androidx.compose.material.icons.outlined.AutoGraph
-import androidx.compose.material.icons.outlined.Campaign
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.InsertChartOutlined
-import androidx.compose.material.icons.outlined.PieChart
-import androidx.compose.material.icons.outlined.SmartToy
-import androidx.compose.material.icons.outlined.SpaceDashboard
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -46,9 +36,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.fiap.safework.R
 import br.com.fiap.safework.ui.theme.AppTheme
 
 @Composable
@@ -59,7 +50,7 @@ fun AssistantScreen() {
             bottomBar = {
                 Column {
                     AssistantInputBar()
-                    AssistantBottomBar()
+                    BottomNavigationBar(selectedIndex = 2)
                 }
             }
         ) { paddingValues ->
@@ -80,6 +71,9 @@ private fun AssistantScreenPreview() {
     }
 }
 
+// Cabeçalho da tela, padronizado com o mesmo esquema de margens, fonte e cores
+// utilizado em TransparencyScreen (título em headlineLarge/onBackground e
+// subtítulo em bodyMedium/tertiary).
 @Composable
 fun AssistantTopBar(modifier: Modifier = Modifier) {
     Surface(
@@ -97,7 +91,7 @@ fun AssistantTopBar(modifier: Modifier = Modifier) {
         ) {
             Icon(
                 imageVector = Icons.Outlined.AutoAwesome,
-                contentDescription = "Icone AutoAwesome",
+                contentDescription = stringResource(id = R.string.assistant_icon_description),
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(40.dp)
             )
@@ -105,14 +99,14 @@ fun AssistantTopBar(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "AI Assistant",
+                    text = stringResource(id = R.string.assistant_title),
                     style = MaterialTheme.typography.headlineLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
                 Text(
-                    text = "Online e pronto para ajudar",
+                    text = stringResource(id = R.string.assistant_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
@@ -128,67 +122,6 @@ fun AssistantTopBar(modifier: Modifier = Modifier) {
 private fun AssistantTopBarPreview() {
     AppTheme {
         AssistantTopBar()
-    }
-}
-
-data class BottomNavigationItem(
-    val title: String,
-    val icon: ImageVector
-)
-
-@Composable
-fun AssistantBottomBar(modifier: Modifier = Modifier) {
-    val items = listOf(
-        BottomNavigationItem("Home", Icons.Outlined.Home),
-        BottomNavigationItem("Channel", Icons.Outlined.Campaign),
-        BottomNavigationItem("AI", Icons.Outlined.SmartToy),
-        BottomNavigationItem("Climate", Icons.Outlined.InsertChartOutlined),
-        BottomNavigationItem("Panel", Icons.Outlined.PieChart)
-    )
-
-    NavigationBar(
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 8.dp
-    ) {
-        items.forEach { item ->
-            NavigationBarItem(
-                selected = false,
-                onClick = {},
-                icon = {
-                    Icon(
-                        imageVector = item.icon,
-                        contentDescription = item.title,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(24.dp)
-                    )
-                },
-                label = {
-                    Text(
-                        text = item.title,
-                        style = MaterialTheme.typography.labelMedium
-                    )
-                },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                    unselectedTextColor = MaterialTheme.colorScheme.tertiary,
-                    indicatorColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    }
-}
-
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO
-)
-@Composable
-private fun AssistantBottomBarPreview() {
-    AppTheme {
-        AssistantBottomBar()
     }
 }
 
@@ -210,12 +143,12 @@ fun AssistantContent(modifier: Modifier = Modifier) {
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
         ) {
             Text(
-                text = "Olá! Eu sou a Inteligência Artificial\n" +
-                        "do app. Estou aqui para tirar suas\n" +
-                        "dúvidas sobre o Código de\n" +
-                        "Conduta, linguagem inclusiva ou\n" +
-                        "regras de segurança. Como posso\n" +
-                        "ajudar?",
+                text = stringResource(R.string.oi_sou_ia) +
+                        stringResource(R.string.do_app_estou_aqui_para_tirar_suas) +
+                        stringResource(R.string.d_vidas_sobre_o_c_digo_de) +
+                        stringResource(R.string.conduta_linguagem_inclusiva_ou) +
+                        stringResource(R.string.regras_de_seguran_a_como_posso) +
+                        stringResource(R.string.ajudar),
                 modifier = Modifier.padding(10.dp),
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -308,7 +241,7 @@ fun AssistantInputBar(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = "",
             placeholder = {
-                Text(text = "Ask AI something.")
+                Text(text = stringResource(id = R.string.assistant_input_placeholder))
             },
             onValueChange = {},
             modifier = Modifier
@@ -327,7 +260,7 @@ fun AssistantInputBar(modifier: Modifier = Modifier) {
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.Send,
-                    contentDescription = "Send message",
+                    contentDescription = stringResource(id = R.string.assistant_send_button_description),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }

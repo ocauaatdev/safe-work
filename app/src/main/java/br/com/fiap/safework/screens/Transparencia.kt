@@ -225,23 +225,31 @@ fun PrivacyBanner() {
     }
 }
 
+/**
+ * Barra de navegação inferior padrão do app.
+ * Usada por todas as telas para manter a mesma estilização de ícones,
+ * cores, fontes e espaçamentos.
+ *
+ * @param selectedIndex índice do item que deve aparecer selecionado
+ * (0 = Início, 1 = Canal, 2 = IA, 3 = Clima, 4 = Painel).
+ */
 @Composable
-fun BottomNavigationBar() {
+fun BottomNavigationBar(selectedIndex: Int = 4) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 8.dp
     ) {
         val items = listOf(
-            Triple(R.string.nav_inicio, Icons.Outlined.Home, false),
-            Triple(R.string.nav_canal, Icons.Outlined.Campaign, false),
-            Triple(R.string.nav_ia, Icons.Outlined.SmartToy, false),
-            Triple(R.string.nav_clima, Icons.Outlined.InsertChartOutlined, false),
-            Triple(R.string.nav_painel, Icons.Outlined.PieChart, true)
+            Pair(R.string.nav_inicio, Icons.Outlined.Home),
+            Pair(R.string.nav_canal, Icons.Outlined.Campaign),
+            Pair(R.string.nav_ia, Icons.Outlined.SmartToy),
+            Pair(R.string.nav_clima, Icons.Outlined.InsertChartOutlined),
+            Pair(R.string.nav_painel, Icons.Outlined.PieChart)
         )
 
-        items.forEach { item ->
+        items.forEachIndexed { index, item ->
             NavigationBarItem(
-                selected = item.third,
+                selected = index == selectedIndex,
                 onClick = { },
                 icon = {
                     Icon(

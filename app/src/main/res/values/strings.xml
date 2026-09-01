@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafeWork</string>
+
+    <!-- Tela de Transparência -->
     <string name="title_transparencia">Transparência</string>
     <string name="subtitle_transparencia">Acompanhe o impacto das nossas ações.</string>
     <string name="card_meta_titulo">Meta de Diversidade 2024</string>
@@ -8,12 +11,46 @@
     <string name="card_engajamento_titulo">Engajamento nas pesquisas</string>
     <string name="card_denuncias_titulo">Denúncias acolhidas</string>
     <string name="banner_privacidade">Todos os dados apresentados são agregados e anonimizados para garantir a privacidade de todos os colaboradores.</string>
+
+    <!-- Barra de navegação inferior (compartilhada entre as telas) -->
     <string name="nav_inicio">Início</string>
     <string name="nav_canal">Canal</string>
     <string name="nav_ia">IA</string>
     <string name="nav_clima">Clima</string>
     <string name="nav_painel">Painel</string>
-    <string name="ethical_channel_subtitle">Canal Ético / Acolhimento Anônimo</string>
-    <string name="ethical_channel_title">Canal de Escuta</string>
-    <string name="icon_agency_desc">Ícone do órgão</string>
+
+    <!-- Tela inicial (InitialScreen) -->
+    <string name="welcome_message">Um espaço seguro para ouvir, acolher e transformar</string>
+    <string name="start_button">Começar</string>
+    <string name="content_description_afrodescendente">Ilustração de homem afrodescendente</string>
+    <string name="content_description_burca">Ilustração de mulher usando burca</string>
+    <string name="content_description_logo">Logo do SafeWork</string>
+
+    <!-- Tela Pulso Social (PulsoSocialScreen) -->
+    <string name="screen_name">Pulso Social</string>
+    <string name="quick_survey">Pesquisa rápida (1/2)</string>
+    <string name="feeling_question">Como você se sentiu trabalhando aqui nesta semana?</string>
+    <string name="exclusion_question">Você presenciou alguma atitude excludente hoje?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="submit_answers">Enviar Respostas</string>
+    <string name="emoji_nervoso">Nervoso</string>
+    <string name="emoji_triste">Triste</string>
+    <string name="emoji_desconfortavel">Desconfortável</string>
+    <string name="emoji_feliz">Feliz</string>
+    <string name="emoji_olho_estrelado">Olho estrelado</string>
+
+    <!-- Tela do Assistente (AssistantScreen) -->
+    <string name="assistant_title">Assistente de IA</string>
+    <string name="assistant_subtitle">Online e pronto para ajudar</string>
+    <string name="assistant_icon_description">Ícone de inteligência artificial</string>
+    <string name="assistant_input_placeholder">Pergunte algo à IA</string>
+    <string name="assistant_send_button_description">Enviar mensagem</string>
+    <string name="oi_sou_ia">Olá! Eu sou a Inteligência Artificial\n</string>
+    <string name="do_app_estou_aqui_para_tirar_suas">do app. Estou aqui para tirar suas\n</string>
+    <string name="d_vidas_sobre_o_c_digo_de">dúvidas sobre o Código de\n</string>
+    <string name="conduta_linguagem_inclusiva_ou">Conduta, linguagem inclusiva ou\n</string>
+    <string name="regras_de_seguran_a_como_posso">regras de segurança. Como posso\n</string>
+    <string name="ajudar">ajudar?</string>
+
 </resources>
