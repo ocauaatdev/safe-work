@@ -1,5 +1,6 @@
 package br.com.fiap.safework.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,9 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.fiap.safework.R
+import br.com.fiap.safework.ui.theme.AppTheme
 
 // Cores personalizadas baseadas na imagem
 val Teal500 = Color(0xFF009688)
@@ -36,8 +41,9 @@ fun EthicalChannelScreen() {
     val scrollState = rememberScrollState()
 
     Scaffold(
+        topBar = {TopBarEthicalChannel()},
         bottomBar = {
-            SafeWorkBottomBar(selectedItem) { selectedItem = it }
+            BottomNavigationBar(selectedIndex = 1)
         }
     ) { paddingValues ->
         Column(
@@ -49,32 +55,12 @@ fun EthicalChannelScreen() {
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Pequeno título superior
-            Text(
-                text = "Canal Ético / Acolhimento Anônimo",
-                color = Color.Gray,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            // Título Principal
-            Text(
-                text = "Canal de Escuta",
-                style = MaterialTheme.typography.headlineMedium.copy(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp
-                ),
-                color = DarkNavyButton,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            // Crachá de Anonimato
-            AnonymityBadge()
-
             Spacer(modifier = Modifier.height(24.dp))
 
             // Seção: Qual é o assunto?
-            SubjectSelectionGroup(selectedSubject = selectedSubject, onSubjectSelected = { selectedSubject = it })
+            SubjectSelectionGroup(
+                selectedSubject = selectedSubject,
+                onSubjectSelected = { selectedSubject = it })
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -92,6 +78,58 @@ fun EthicalChannelScreen() {
             ExternalReportsCard()
         }
     }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Composable
+private fun EthicalChannelScreenPreview() {
+    AppTheme() {
+        EthicalChannelScreen()
+    }
+}
+
+@Composable
+fun TopBarEthicalChannel(modifier: Modifier = Modifier) {
+
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.background,
+        tonalElevation = 2.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .padding(horizontal = 24.dp, vertical = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+
+                Text(
+                    text = "Canal de Escuta",
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 28.sp
+                    ),
+                    color = DarkNavyButton,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+                Text(
+                    text = "Canal Ético / Acolhimento Anônimo",
+                    color = Color.Gray,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
+//                Crachá de Anonimato
+                AnonymityBadge()
+            }
+        }
+    }
+
 }
 
 @Composable
@@ -322,38 +360,6 @@ fun ExternalReportContactItem(title: String, numbers: String, icon: ImageVector)
                 color = DarkNavyButton,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold
-            )
-        }
-    }
-}
-
-@Composable
-fun SafeWorkBottomBar(selectedItem: Int, onItemSelected: (Int) -> Unit) {
-    val navItems = listOf(
-        NavItem("Início", Icons.Outlined.Home),
-        NavItem("Canal", Icons.Outlined.Campaign), // Ícone de megafone corrigido
-        NavItem("IA", Icons.Outlined.SmartToy), // Ícone de robô
-        NavItem("Clima", Icons.Outlined.InsertChartOutlined), // Ícone de gráfico
-        NavItem("Painel", Icons.Outlined.PieChart) // Ícone de gráfico de pizza
-    )
-
-    NavigationBar(
-        containerColor = Color.White,
-        tonalElevation = 8.dp
-    ) {
-        navItems.forEachIndexed { index, item ->
-            NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.label) },
-                label = { Text(item.label) },
-                selected = selectedItem == index,
-                onClick = { onItemSelected(index) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Teal500,
-                    selectedTextColor = Teal500,
-                    unselectedIconColor = Color.Gray,
-                    unselectedTextColor = Color.Gray,
-                    indicatorColor = Color.White // Remover o círculo de fundo de seleção padrão
-                )
             )
         }
     }
