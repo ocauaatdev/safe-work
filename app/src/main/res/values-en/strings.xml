@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">SafeWork</string>
     <string name="title_transparencia">Transparency</string>
-    <string name="subtitle_transparencia">Follow the impact of our actions.</string>
+    <string name="subtitle_transparencia">Follow our actions impact.</string>
     <string name="card_meta_titulo">2024 Diversity Goal</string>
     <string name="card_meta_atingida">AFFECTED</string>
     <string name="card_meta_descricao">We are just 15% away from reaching our annual goal for diverse hires.</string>
@@ -14,4 +14,19 @@
     <string name="nav_ia">AI</string>
     <string name="nav_clima">Climate</string>
     <string name="nav_painel">Panel</string>
+
+
+    //tela zero
+    <string name="welcome_message">A safe place to listen, support and inspire changes</string>
+    <string name="start_button">Start</string>
+
+
+    //quarta tela **yes e no eu nao usei
+    <string name="screen_name">Social Pulse</string>
+    <string name="quick_survey">Quick survey (1/2)</string>
+    <string name="feeling_question">How did you feel about this working week?</string>
+    <string name="excluison_question">Have you experienced a moment when someone was made to feel left out today?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit_answers">Submit Answers</string>
 </resources>
