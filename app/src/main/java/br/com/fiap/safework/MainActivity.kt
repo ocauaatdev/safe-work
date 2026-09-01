@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import br.com.fiap.safework.screens.AssistantScreen
 import br.com.fiap.safework.screens.TransparencyScreen
+import br.com.fiap.safework.screens.EthicalChannelScreen
 import br.com.fiap.safework.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {

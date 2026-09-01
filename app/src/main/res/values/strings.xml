@@ -13,4 +13,7 @@
     <string name="nav_ia">IA</string>
     <string name="nav_clima">Clima</string>
     <string name="nav_painel">Painel</string>
+    <string name="ethical_channel_subtitle">Canal Ético / Acolhimento Anônimo</string>
+    <string name="ethical_channel_title">Canal de Escuta</string>
+    <string name="icon_agency_desc">Ícone do órgão</string>
 </resources>

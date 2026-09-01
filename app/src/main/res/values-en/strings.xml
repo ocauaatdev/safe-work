@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SafeWork</string>
+    <string name="app_name">SafeWorkUS</string>
     <string name="title_transparencia">Transparency</string>
     <string name="subtitle_transparencia">Follow the impact of our actions.</string>
     <string name="card_meta_titulo">2024 Diversity Goal</string>
@@ -14,4 +14,7 @@
     <string name="nav_ia">AI</string>
     <string name="nav_clima">Climate</string>
     <string name="nav_painel">Panel</string>
+    <string name="ethical_channel_subtitle">Ethical Channel / Anonymous Support</string>
+    <string name="ethical_channel_title">Listening Channel</string>
+    <string name="icon_agency_desc">Agency icon</string>
 </resources>
