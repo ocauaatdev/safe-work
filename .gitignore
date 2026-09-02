@@ -1,15 +1,28 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+/.idea/
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+*.apk
+*.aar
+*.jks
+*.keystore
+
+# Android Studio
+*.ipr
+*.iws
+.navigation/
+captures/
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
