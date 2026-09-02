@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "br.com.fiap.safework"
-    compileSdk = 37
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "br.com.fiap.safework"
