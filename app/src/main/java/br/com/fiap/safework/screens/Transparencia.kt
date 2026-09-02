@@ -20,17 +20,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.safework.R
+import br.com.fiap.safework.ui.components.BottomNavigationBar
 import br.com.fiap.safework.ui.components.DonutChart
-import br.com.fiap.safework.ui.theme.AppTheme
-import br.com.fiap.safework.ui.theme.LightBlueIconBg
-import br.com.fiap.safework.ui.theme.LightGreenIconBg
+import br.com.fiap.safework.ui.theme.*
 
 @Composable
-fun TransparencyScreen() {
+fun TransparencyScreen(navController: NavController) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
-        bottomBar = { BottomNavigationBar() },
+        bottomBar = { BottomNavigationBar(navController = navController, selectedIndex = 4) },
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -84,11 +84,12 @@ fun TransparencyScreen() {
     }
 }
 
+
 @Preview
 @Composable
 private fun TransparenciaPreview() {
     AppTheme {
-        TransparencyScreen()
+        // TransparencyScreen() // Previews will need a mock NavController or similar if needed
     }
 }
 
@@ -144,6 +145,7 @@ fun MainDiversityCard() {
         }
     }
 }
+
 @Composable
 fun InfoCard(
     modifier: Modifier = Modifier,
@@ -173,7 +175,7 @@ fun InfoCard(
             ) {
                 Icon(
                     imageVector = icon,
-                    contentDescription = null,
+                    contentDescription = "check icon",
                     tint = iconColor,
                     modifier = Modifier.size(20.dp)
                 )
@@ -200,7 +202,10 @@ fun PrivacyBanner() {
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(16.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.surfaceVariant)
+        border = androidx.compose.foundation.BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
         Row(
             modifier = Modifier
@@ -210,7 +215,7 @@ fun PrivacyBanner() {
         ) {
             Icon(
                 imageVector = Icons.Outlined.Security,
-                contentDescription = null,
+                contentDescription = "shield icon",
                 tint = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.size(24.dp)
             )
@@ -220,56 +225,6 @@ fun PrivacyBanner() {
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.tertiary,
                 lineHeight = 18.sp
-            )
-        }
-    }
-}
-
-/**
- * Barra de navegação inferior padrão do app.
- * Usada por todas as telas para manter a mesma estilização de ícones,
- * cores, fontes e espaçamentos.
- *
- * @param selectedIndex índice do item que deve aparecer selecionado
- * (0 = Início, 1 = Canal, 2 = IA, 3 = Clima, 4 = Painel).
- */
-@Composable
-fun BottomNavigationBar(selectedIndex: Int = 4) {
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 8.dp
-    ) {
-        val items = listOf(
-            Pair(R.string.nav_inicio, Icons.Outlined.Home),
-            Pair(R.string.nav_canal, Icons.Outlined.Campaign),
-            Pair(R.string.nav_ia, Icons.Outlined.SmartToy),
-            Pair(R.string.nav_clima, Icons.Outlined.InsertChartOutlined),
-            Pair(R.string.nav_painel, Icons.Outlined.PieChart)
-        )
-
-        items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = index == selectedIndex,
-                onClick = { },
-                icon = {
-                    Icon(
-                        imageVector = item.second,
-                        contentDescription = stringResource(id = item.first)
-                    )
-                },
-                label = {
-                    Text(
-                        text = stringResource(id = item.first),
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                    unselectedTextColor = MaterialTheme.colorScheme.tertiary,
-                    indicatorColor = MaterialTheme.colorScheme.surface
-                )
             )
         }
     }

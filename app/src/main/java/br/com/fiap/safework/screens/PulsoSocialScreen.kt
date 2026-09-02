@@ -1,277 +1,237 @@
 package br.com.fiap.safework.screens
 
-import android.content.res.Configuration
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.safework.R
-import br.com.fiap.safework.ui.theme.AppTheme
+import br.com.fiap.safework.ui.components.BottomNavigationBar
+import br.com.fiap.safework.ui.theme.Poppins
 
 @Composable
-fun PulsoSocialScreen() {
+fun PulsoSocialScreen(navController: NavController) {
+
+    var selectedEmoji by remember { mutableStateOf("🙂") }
+    var selectedAnswer by remember { mutableStateOf("Não") }
+
+    val emojis = listOf("😡", "😟", "😐", "🙂", "🤩")
+    val yesNoOptions = listOf("Sim", "Não")
+
+    val backdropColor = if (isSystemInDarkTheme()) {
+        MaterialTheme.colorScheme.background
+    } else {
+        MaterialTheme.colorScheme.onBackground
+    }
+
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
-        bottomBar = { BottomNavigationBar(selectedIndex = 3) },
-    ) { paddingValues ->
+        bottomBar = { BottomNavigationBar(navController = navController, selectedIndex = 3) },
+        containerColor = backdropColor
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState())
-                .padding(24.dp)
+                .padding(innerPadding)
         ) {
-            // Cabeçalho da tela (título + subtítulo), padronizado com TransparencyScreen
+
             Text(
-                text = stringResource(id = R.string.screen_name),
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onBackground
+                text = stringResource(R.string.pesquisa_de_clima),
+                fontFamily = Poppins,
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.tertiary,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = stringResource(id = R.string.quick_survey),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.tertiary
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Barra de progresso da pesquisa
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(5.dp)
-                    .background(
-                        color = Color(0xFFE1E1E8),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-            ) {
-                Box(
-                    modifier = Modifier
-                        .width(165.dp)
-                        .height(5.dp)
-                        .background(
-                            color = Color(0xFF059669),
-                            shape = RoundedCornerShape(10.dp)
-                        )
-                )
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
+                    .background(MaterialTheme.colorScheme.background)
+                    .verticalScroll(rememberScrollState())
+                    .padding(24.dp)
             ) {
-                // CARD 1 - COMO VOCÊ SE SENTIU
+
+                Text(
+                    text = stringResource(R.string.pulso_social),
+                    fontFamily = Poppins,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .shadow(
-                            elevation = 4.dp,
-                            shape = RoundedCornerShape(20.dp),
-                            ambientColor = Color.Black.copy(alpha = 0.03f),
-                            spotColor = Color.Black.copy(alpha = 0.03f)
-                        )
-                        .background(
-                            color = Color.White,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .padding(24.dp)
+                        .height(6.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                 ) {
-
-                    Column(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-
-                        Text(
-                            text = stringResource(R.string.feeling_question),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = Color(0xFF1F2937)
-                        )
-
-                        Spacer(
-                            modifier = Modifier.height(20.dp)
-                        )
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.nervous_emoji),
-                                contentDescription = stringResource(R.string.emoji_nervoso),
-                                modifier = Modifier.size(28.dp),
-                                alpha = 0.4f
-                            )
-                            Image(
-                                painter = painterResource(id = R.drawable.sad_emoji),
-                                contentDescription = stringResource(R.string.emoji_triste),
-                                modifier = Modifier.size(28.dp),
-                                alpha = 0.4f
-                            )
-                            Image(
-                                painter = painterResource(id = R.drawable.unconfortable_emoji),
-                                contentDescription = stringResource(R.string.emoji_desconfortavel),
-                                modifier = Modifier.size(28.dp),
-                                alpha = 0.4f
-                            )
-                            Image(
-                                painter = painterResource(id = R.drawable.happy_emoji),
-                                contentDescription = stringResource(R.string.emoji_feliz),
-                                modifier = Modifier.size(28.dp),
-                                alpha = 0.4f
-                            )
-                            Image(
-                                painter = painterResource(id = R.drawable.stareyes_emoji),
-                                contentDescription = stringResource(R.string.emoji_olho_estrelado),
-                                modifier = Modifier.size(28.dp),
-                                alpha = 0.4f
-                            )
-                        }
-                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(0.5f)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.primary)
+                    )
                 }
 
-                // CARD 2 - ATITUDE EXCLUDENTE
-                Box(
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = stringResource(R.string.pesquisa_rapida_1_2),
+                    fontFamily = Poppins,
+                    fontSize = 13.sp,
+                    color = MaterialTheme.colorScheme.tertiary
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(146.dp)
-                        .shadow(
-                            elevation = 4.dp,
-                            shape = RoundedCornerShape(20.dp),
-                            ambientColor = Color.Black.copy(alpha = 0.03f),
-                            spotColor = Color.Black.copy(alpha = 0.03f)
-                        )
-                        .background(
-                            color = Color.White,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .padding(24.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                        .padding(20.dp)
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth()
+                    Text(
+                        text = stringResource(R.string.como_voce_se_sentiu_trabalhando_aqui_nesta_semana),
+                        fontFamily = Poppins,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        lineHeight = 22.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = stringResource(R.string.exclusion_question),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = Color(0xFF1F2937)
-                        )
-                        Spacer(
-                            modifier = Modifier.height(20.dp)
-                        )
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-
-                            // BOTÃO SIM
+                        emojis.forEach { emoji ->
+                            val isSelected = emoji == selectedEmoji
                             Box(
+                                contentAlignment = Alignment.Center,
                                 modifier = Modifier
-                                    .weight(1f)
-                                    .height(48.dp)
-                                    .border(
-                                        width = 1.dp,
-                                        color = Color(0xFFE5E7EB),
-                                        shape = RoundedCornerShape(16.dp)
-                                    ),
-                                contentAlignment = Alignment.Center
+                                    .size(48.dp)
+                                    .clip(CircleShape)
+                                    .clickable { selectedEmoji = emoji }
                             ) {
                                 Text(
-                                    text = stringResource(R.string.yes),
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = Color(0xFF6B7280)
-                                )
-                            }
-
-                            // BOTÃO NÃO
-                            Box(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(48.dp)
-                                    .border(
-                                        width = 1.dp,
-                                        color = Color(0xFF059669),
-                                        shape = RoundedCornerShape(16.dp)
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = stringResource(R.string.no),
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = Color(0xFF059669)
+                                    text = emoji,
+                                    fontSize = if (isSelected) 36.sp else 28.sp,
+                                    modifier = Modifier.alpha(if (isSelected) 1f else 0.4f)
                                 )
                             }
                         }
                     }
                 }
 
-                // BOTÃO ENVIAR RESPOSTAS
-                Box(
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                        .padding(20.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.voce_presenciou_alguma_atitude_excludente_hoje),
+                        fontFamily = Poppins,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        lineHeight = 22.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        yesNoOptions.forEach { option ->
+                            val isSelected = option == selectedAnswer
+
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(
+                                        if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                                        else Color.Transparent
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                                        shape = RoundedCornerShape(12.dp)
+                                    )
+                                    .clickable { selectedAnswer = option }
+                                    .padding(vertical = 14.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = option,
+                                    fontFamily = Poppins,
+                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
+                                    fontSize = 14.sp,
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    shape = RoundedCornerShape(14.dp),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp)
-                        .background(
-                            color = Color(0xFF059669),
-                            shape = RoundedCornerShape(16.dp)
-                        ),
-                    contentAlignment = Alignment.Center
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.submit_answers),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = Color.White
-                        )
-
-                        Text(
-                            text = "✓",
-                            fontSize = 14.sp,
-                            color = Color.White
-                        )
-                    }
+                    Text(
+                        text = stringResource(R.string.enviar_respostas),
+                        fontFamily = Poppins,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 15.sp,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        imageVector = Icons.Outlined.CheckCircle,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             }
         }
     }
 }
 
-@Composable
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO
-)
-fun PulsoSocialScreenPreview() {
-    AppTheme {
-        PulsoSocialScreen()
-    }
-}
+

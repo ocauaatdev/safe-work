@@ -27,18 +27,13 @@
     <string name="content_description_logo">Logo do SafeWork</string>
 
     <!-- Tela Pulso Social (PulsoSocialScreen) -->
-    <string name="screen_name">Pulso Social</string>
-    <string name="quick_survey">Pesquisa rápida (1/2)</string>
-    <string name="feeling_question">Como você se sentiu trabalhando aqui nesta semana?</string>
-    <string name="exclusion_question">Você presenciou alguma atitude excludente hoje?</string>
-    <string name="yes">Sim</string>
-    <string name="no">Não</string>
-    <string name="submit_answers">Enviar Respostas</string>
-    <string name="emoji_nervoso">Nervoso</string>
-    <string name="emoji_triste">Triste</string>
-    <string name="emoji_desconfortavel">Desconfortável</string>
-    <string name="emoji_feliz">Feliz</string>
-    <string name="emoji_olho_estrelado">Olho estrelado</string>
+    <string name="pesquisa_de_clima">Pesquisa de Clima</string>
+    <string name="pulso_social">Pulso Social</string>
+    <string name="pesquisa_rapida_1_2">Pesquisa rápida (1/2)</string>
+    <string name="como_voce_se_sentiu_trabalhando_aqui_nesta_semana">Como você se sentiu trabalhando aqui nesta semana?</string>
+    <string name="voce_presenciou_alguma_atitude_excludente_hoje">Você presenciou alguma atitude excludente hoje?</string>
+    <string name="enviar_respostas">Enviar Respostas</string>
+
 
     <!-- Tela do Assistente (AssistantScreen) -->
     <string name="assistant_title">Assistente de IA</string>
@@ -52,5 +47,45 @@
     <string name="conduta_linguagem_inclusiva_ou">Conduta, linguagem inclusiva ou\n</string>
     <string name="regras_de_seguran_a_como_posso">regras de segurança. Como posso\n</string>
     <string name="ajudar">ajudar?</string>
+
+    <!-- Tela de Canal de Escuta (EtchicalChannelScreen)-->
+    <string name="denuncia">Denúncia</string>
+    <string name="elogio">Elogio</string>
+    <string name="sugestao">Sugestão</string>
+    <string name="outro">Outro</string>
+    <string name="canal_etico_acolhimento_anonimo">Canal Ético / Acolhimento Anônimo</string>
+    <string name="canal_de_escuta">Canal de Escuta</string>
+    <string name="_100_anonimo">100% Anônimo</string>
+    <string name="qual_o_assunto">Qual é o assunto?</string>
+    <string name="descreva_o_que_aconteceu">Descreva o que aconteceu</string>
+    <string name="escreva_aqui_com_detalhes_nao_se_preocupe_sua_identidade_esta_protegida">Escreva aqui com detalhes. Não se preocupe, sua identidade está protegida...</string>
+    <string name="enviar_relato_anonimo">Enviar Relato Anônimo</string>
+    <string name="denuncias_externas">Denúncias Externas</string>
+    <string name="para_casos_graves_ou_se_preferir_apoio_externo_voce_pode_contatar_diretamente_os_orgaos_responsaveis">Para casos graves ou se preferir apoio externo, você pode contatar diretamente os órgãos responsáveis:</string>
+    <string name="policia_central_de_atendimento">Polícia / Central de Atendimento</string>
+    <string name="ministerio_do_trabalho_alo_trabalho">Ministério do Trabalho (Alô Trabalho)</string>
+    <string name="de_acordo_com_o_nosso_guia_de">De acordo com o nosso Guia de\n</string>
+    <string name="linguagem_inclusiva_o">Linguagem Inclusiva, o\n</string>
+    <string name="capacitismo_a_discrimina_o">capacitismo é a discriminação\n</string>
+    <string name="contra_pessoas_com_defici_ncia">contra pessoas com deficiência.\n</string>
+    <string name="recomenda_se_evitar_express_es">Recomenda-se evitar expressões\n</string>
+    <string name="como_dar_uma_de_cego_ou_estar">como \"dar uma de cego\" ou \"estar\n</string>
+    <string name="surdo_o_ideal_focar_na">surdo\". O ideal é focar na\n</string>
+    <string name="compet_ncia_e_na_acessibilidade">competência e na acessibilidade.</string>
+    <string name="duvida_sobre_epi">Dúvida sobre EPI</string>
+    <string name="linguagem_neutra">Linguagem neutra</string>
+    <string name="o_que_capacitismo">O que é capacitismo?</string>
+
+    <!-- Tela de Resumo Diário (Home/Cultura) -->
+    <string name="bom_dia">Bom dia! 👋</string>
+    <string name="resumo_diario_cultura">Aqui está o seu resumo diário de cultura.</string>
+    <string name="tag_inclusao">Inclusão</string>
+    <string name="titulo_capacitismo">Como identificar e combater o capacitismo?</string>
+    <string name="desc_capacitismo">Aprenda a reconhecer atitudes excludentes e saiba como promover um ambiente de trabalho acessível para todos.</string>
+    <string name="ler_artigo">Ler artigo</string>
+    <string name="tag_seguranca">Segurança</string>
+    <string name="titulo_epis">Uso correto de EPIs na sua rotina</string>
+    <string name="desc_epis">Entenda seus direitos e por que o uso do equipamento de proteção individual é inegociável na operação.</string>
+    <string name="assistir_video">Assistir vídeo</string>
 
 </resources>

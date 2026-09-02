@@ -1,368 +1,316 @@
 package br.com.fiap.safework.screens
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.automirrored.outlined.Send
+import androidx.compose.material.icons.outlined.Campaign
+import androidx.compose.material.icons.outlined.GridView
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.SmartToy
+import androidx.compose.material.icons.outlined.TrendingUp
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.safework.R
-import br.com.fiap.safework.ui.theme.AppTheme
-
-// Cores personalizadas baseadas na imagem
-val Teal500 = Color(0xFF009688)
-val LightGreenBadge = Color(0xFFE8F5E9)
-val LightGreenText = Color(0xFF388E3C)
-val LightBlueCard = Color(0xFFE3F2FD)
-val DarkNavyButton = Color(0xFF192231)
-val GrayTextFieldBackground = Color(0xFFF1F3F4)
-
-@Composable
-fun EthicalChannelScreen() {
-    // Estados para controlar os inputs e a navegação
-    var selectedSubject by remember { mutableStateOf("Denúncia") }
-    var descriptionText by remember { mutableStateOf("") }
-    var selectedItem by remember { mutableIntStateOf(1) } // 'Canal' é o segundo item
-
-    val scrollState = rememberScrollState()
-
-    Scaffold(
-        topBar = {TopBarEthicalChannel()},
-        bottomBar = {
-            BottomNavigationBar(selectedIndex = 1)
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-                .background(Color.White)
-                .verticalScroll(scrollState)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Seção: Qual é o assunto?
-            SubjectSelectionGroup(
-                selectedSubject = selectedSubject,
-                onSubjectSelected = { selectedSubject = it })
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Seção: Descreva o que aconteceu
-            DescriptionInputSection(text = descriptionText, onTextChange = { descriptionText = it })
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Botão de Envio
-            SendReportButton()
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Seção de Denúncias Externas
-            ExternalReportsCard()
-        }
-    }
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Composable
-private fun EthicalChannelScreenPreview() {
-    AppTheme() {
-        EthicalChannelScreen()
-    }
-}
-
-@Composable
-fun TopBarEthicalChannel(modifier: Modifier = Modifier) {
-
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colorScheme.background,
-        tonalElevation = 2.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(WindowInsets.statusBars)
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-
-                Text(
-                    text = "Canal de Escuta",
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 28.sp
-                    ),
-                    color = DarkNavyButton,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-                Text(
-                    text = "Canal Ético / Acolhimento Anônimo",
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
-//                Crachá de Anonimato
-                AnonymityBadge()
-            }
-        }
-    }
-
-}
-
-@Composable
-fun AnonymityBadge() {
-    Surface(
-        color = LightGreenBadge,
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Lock,
-                contentDescription = "Ícone de cadeado",
-                tint = LightGreenText,
-                modifier = Modifier.size(16.dp)
-            )
-            Spacer(modifier = Modifier.width(6.dp))
-            Text(
-                text = "100% Anônimo",
-                color = LightGreenText,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium
-            )
-        }
-    }
-}
+import br.com.fiap.safework.ui.components.BottomNavigationBar
+import br.com.fiap.safework.ui.theme.Poppins
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SubjectSelectionGroup(selectedSubject: String, onSubjectSelected: (String) -> Unit) {
-    val subjects = listOf("Denúncia", "EPIs", "Elogio", "Sugestão", "Outro")
+fun EthicalChannelScreen(navController: NavController) {
+    var selectedSubject by remember { mutableStateOf("Denúncia") }
+    var descriptionText by remember { mutableStateOf("") }
+    val subjectOptions = listOf(
+        stringResource(R.string.denuncia),
+        stringResource(R.string.elogio), stringResource(R.string.sugestao),
+        stringResource(R.string.outro)
+    )
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = "Qual é o assunto?",
-            style = MaterialTheme.typography.titleMedium,
-            color = DarkNavyButton,
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
-
-        FlowRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            subjects.forEach { subject ->
-                SubjectChip(
-                    text = subject,
-                    isSelected = subject == selectedSubject,
-                    onSelect = { onSubjectSelected(subject) }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun SubjectChip(text: String, isSelected: Boolean, onSelect: () -> Unit) {
-    Surface(
-        color = if (isSelected) DarkNavyButton else GrayTextFieldBackground,
-        shape = RoundedCornerShape(20.dp),
-        onClick = onSelect,
-        modifier = Modifier.padding(vertical = 2.dp)
-    ) {
-        Text(
-            text = text,
-            color = if (isSelected) Color.White else Color.Gray,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
-    }
-}
-
-@Composable
-fun DescriptionInputSection(text: String, onTextChange: (String) -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = "Descreva o que aconteceu",
-            style = MaterialTheme.typography.titleMedium,
-            color = DarkNavyButton,
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
-
-        OutlinedTextField(
-            value = text,
-            onValueChange = onTextChange,
-            placeholder = {
-                Text(
-                    text = "Escreva aqui com detalhes. Não se preocupe, sua identidade está protegida...",
-                    color = Color.Gray,
-                    fontSize = 14.sp
-                )
-            },
+    Scaffold(
+        bottomBar = { BottomNavigationBar(navController = navController, selectedIndex = 1) },
+        containerColor = MaterialTheme.colorScheme.background
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                unfocusedBorderColor = Color.LightGray,
-                focusedBorderColor = Teal500
-            )
-        )
-    }
-}
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
 
-@Composable
-fun SendReportButton() {
-    Button(
-        onClick = { /* Lógica de envio */ },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Teal500,
-            contentColor = Color.White
-        )
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "Enviar Relato Anônimo",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold
+                text = stringResource(R.string.canal_etico_acolhimento_anonimo),
+                fontFamily = Poppins,
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.tertiary,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
             )
-            Spacer(modifier = Modifier.width(10.dp))
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.Send,
-                contentDescription = "Ícone de enviar",
-                modifier = Modifier.size(20.dp)
-            )
-        }
-    }
-}
 
-@Composable
-fun ExternalReportsCard() {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = LightBlueCard)
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            // Título do Cartão com Ícone
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 12.dp)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
+                    .background(MaterialTheme.colorScheme.surface)
+                    .verticalScroll(rememberScrollState())
+                    .padding(24.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = "Ícone de informação",
-                    tint = Color(0xFF1565C0),
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
-                    text = "Denúncias Externas",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = DarkNavyButton,
-                    fontWeight = FontWeight.SemiBold
+                    text = stringResource(R.string.canal_de_escuta),
+                    fontFamily = Poppins,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Lock,
+                        contentDescription = "Lock icon",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = stringResource(R.string._100_anonimo),
+                        fontFamily = Poppins,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+
+                Text(
+                    text = stringResource(R.string.qual_o_assunto),
+                    fontFamily = Poppins,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.height(14.dp))
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    items(subjectOptions) { option ->
+                        val isSelected = option == selectedSubject
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .background(
+                                    if (isSelected) MaterialTheme.colorScheme.onSurface
+                                    else MaterialTheme.colorScheme.surfaceVariant
+                                )
+                                .clickable { selectedSubject = option }
+                                .padding(horizontal = 18.dp, vertical = 8.dp)
+                        ) {
+                            Text(
+                                text = option,
+                                fontFamily = Poppins,
+                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                                fontSize = 13.sp,
+                                color = if (isSelected) MaterialTheme.colorScheme.surface
+                                else MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(28.dp))
+
+                Text(
+                    text = stringResource(R.string.descreva_o_que_aconteceu),
+                    fontFamily = Poppins,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(140.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .border(
+                            1.dp,
+                            MaterialTheme.colorScheme.surfaceVariant,
+                            RoundedCornerShape(16.dp)
+                        )
+                        .background(MaterialTheme.colorScheme.surface)
+                        .padding(16.dp)
+                ) {
+                    if (descriptionText.isEmpty()) {
+                        Text(
+                            text = stringResource(R.string.escreva_aqui_com_detalhes_nao_se_preocupe_sua_identidade_esta_protegida),
+                            fontFamily = Poppins,
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.tertiary,
+                            lineHeight = 20.sp
+                        )
+                    }
+                    BasicTextField(
+                        value = descriptionText,
+                        onValueChange = { descriptionText = it },
+                        textStyle = TextStyle(
+                            fontFamily = Poppins,
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            lineHeight = 20.sp
+                        ),
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Button(
+                    onClick = { /* TODO */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.enviar_relato_anonimo),
+                        fontFamily = Poppins,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 15.sp,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.Send,
+                        contentDescription = "paper airplane icon",
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
+                        .padding(18.dp)
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = "info icon",
+                            tint = MaterialTheme.colorScheme.secondary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(R.string.denuncias_externas),
+                            fontFamily = Poppins,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(R.string.para_casos_graves_ou_se_preferir_apoio_externo_voce_pode_contatar_diretamente_os_orgaos_responsaveis),
+                        fontFamily = Poppins,
+                        fontSize = 13.sp,
+                        lineHeight = 18.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    ExternalContactRow(
+                        stringResource(R.string.policia_central_de_atendimento),
+                        "190 / 180"
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    ExternalContactRow(
+                        stringResource(R.string.ministerio_do_trabalho_alo_trabalho),
+                        "158"
+                    )
+                }
             }
-
-            // Texto descritivo
-            Text(
-                text = "Para casos graves ou se preferir apoio externo, você pode contatar diretamente os órgãos responsáveis:",
-                color = Color(0xFF1565C0),
-                fontSize = 14.sp,
-                lineHeight = 20.sp,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            // Item de contato 1
-            ExternalReportContactItem(
-                title = "Polícia / Central de Atendimento",
-                numbers = "190 / 180",
-                icon = Icons.Outlined.Phone
-            )
-
-            // Item de contato 2
-            ExternalReportContactItem(
-                title = "Ministério do Trabalho (Alô Trabalho)",
-                numbers = "158",
-                icon = Icons.Outlined.WorkOutline // Ou Ícone relacionado ao trabalho
-            )
         }
     }
 }
 
 @Composable
-fun ExternalReportContactItem(title: String, numbers: String, icon: ImageVector) {
-    Surface(
-        color = Color.White,
-        shape = RoundedCornerShape(8.dp),
+private fun ExternalContactRow(label: String, number: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 6.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(horizontal = 14.dp, vertical = 12.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = "Ícone do órgão",
-                    tint = DarkNavyButton,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = title,
-                    color = DarkNavyButton,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-            Text(
-                text = numbers,
-                color = DarkNavyButton,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold
-            )
-        }
+        Text(
+            text = label,
+            fontFamily = Poppins,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 12.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            text = number,
+            fontFamily = Poppins,
+            fontWeight = FontWeight.Bold,
+            fontSize = 13.sp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
     }
 }
 
-data class NavItem(val label: String, val icon: ImageVector)

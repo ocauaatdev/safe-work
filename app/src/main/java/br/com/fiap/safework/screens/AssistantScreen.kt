@@ -16,9 +16,9 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.AutoAwesome
@@ -39,18 +39,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import br.com.fiap.safework.R
+import br.com.fiap.safework.ui.components.BottomNavigationBar
 import br.com.fiap.safework.ui.theme.AppTheme
 
 @Composable
-fun AssistantScreen() {
+fun AssistantScreen(navController: NavController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             topBar = { AssistantTopBar() },
             bottomBar = {
                 Column {
                     AssistantInputBar()
-                    BottomNavigationBar(selectedIndex = 2)
+                    BottomNavigationBar(navController = navController, selectedIndex = 2)
                 }
             }
         ) { paddingValues ->
@@ -67,13 +69,10 @@ fun AssistantScreen() {
 @Composable
 private fun AssistantScreenPreview() {
     AppTheme {
-        AssistantScreen()
+        // AssistantScreen()
     }
 }
 
-// Cabeçalho da tela, padronizado com o mesmo esquema de margens, fonte e cores
-// utilizado em TransparencyScreen (título em headlineLarge/onBackground e
-// subtítulo em bodyMedium/tertiary).
 @Composable
 fun AssistantTopBar(modifier: Modifier = Modifier) {
     Surface(
@@ -134,7 +133,7 @@ fun AssistantContent(modifier: Modifier = Modifier) {
             .padding(horizontal = 24.dp, vertical = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // mensagem 1
+
         Card(
             modifier = Modifier
                 .align(Alignment.Start)
@@ -154,7 +153,6 @@ fun AssistantContent(modifier: Modifier = Modifier) {
             )
         }
 
-        // mensagem 2
         Card(
             modifier = Modifier
                 .align(Alignment.End)
@@ -170,7 +168,6 @@ fun AssistantContent(modifier: Modifier = Modifier) {
             )
         }
 
-        // mensagem 3
         Card(
             modifier = Modifier
                 .align(Alignment.Start)
@@ -179,14 +176,14 @@ fun AssistantContent(modifier: Modifier = Modifier) {
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
         ) {
             Text(
-                text = "De acordo com o nosso Guia de\n" +
-                        "Linguagem Inclusiva, o\n" +
-                        "capacitismo é a discriminação\n" +
-                        "contra pessoas com deficiência.\n" +
-                        "Recomenda-se evitar expressões\n" +
-                        "como \"dar uma de cego\" ou \"estar\n" +
-                        "surdo\". O ideal é focar na\n" +
-                        "competência e na acessibilidade.",
+                text = stringResource(R.string.de_acordo_com_o_nosso_guia_de) +
+                        stringResource(R.string.linguagem_inclusiva_o) +
+                        stringResource(R.string.capacitismo_a_discrimina_o) +
+                        stringResource(R.string.contra_pessoas_com_defici_ncia) +
+                        stringResource(R.string.recomenda_se_evitar_express_es) +
+                        stringResource(R.string.como_dar_uma_de_cego_ou_estar) +
+                        stringResource(R.string.surdo_o_ideal_focar_na) +
+                        stringResource(R.string.compet_ncia_e_na_acessibilidade),
                 modifier = Modifier.padding(10.dp),
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -212,7 +209,9 @@ fun AssistantInputBar(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(top = 8.dp)
     ) {
-        val sugestoes = listOf("Dúvida sobre EPI", "Linguagem neutra", "O que é capacitismo?")
+        val sugestoes = listOf(stringResource(R.string.duvida_sobre_epi),
+            stringResource(R.string.linguagem_neutra), stringResource(R.string.o_que_capacitismo)
+        )
 
         LazyRow(
             modifier = Modifier.padding(bottom = 8.dp),
